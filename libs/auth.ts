@@ -2,19 +2,17 @@ import axios from "axios";
 
 const API_URL = "http://test-291124.vynz.my.id/api/auth";
 
-const api = axios.create({
-  baseURL: API_URL,
-  headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-  },
-});
-
 export const login = async (email: string, password: string) => {
   try {
-    const response = await api.post("/login", { email, password });
+    const response = await axios.post(`${API_URL}/login`, { email, password }, 
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     
-    console.log("API Response:", response.data);
+    // console.log("API Response:", response.data);
 
     const token = response.data?.data?.token;
     if (token) {
