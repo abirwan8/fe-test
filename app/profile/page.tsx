@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { MdFemale, MdMale } from "react-icons/md";
 import Loading from "../components/Loading";
 
-export default function page() {
+const ProfilePage = () => {
   const [profileData, setProfileData] = useState<any>(null);
   const [error, setError] = useState<string>("");
 
@@ -67,3 +67,5 @@ export default function page() {
     </div>
   );
 }
+
+export default ProfilePage

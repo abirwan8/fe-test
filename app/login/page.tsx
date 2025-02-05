@@ -8,20 +8,17 @@ import Link from "next/link";
 import { MdEmail, MdLock } from "react-icons/md";
 import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
-export default function page() {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
 
-  // Handler Submit Login 
+  // Handler Submit Login
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-
-    console.log("Form submitted"); // Debugging
-    console.log("Logging in with:", email, password);
 
     const result = await login(email, password);
 
@@ -68,4 +65,6 @@ export default function page() {
       </Login>
     </div>
   );
-}
+};
+
+export default LoginPage;
