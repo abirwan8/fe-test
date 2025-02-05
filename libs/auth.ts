@@ -1,0 +1,40 @@
+import axios from "axios";
+
+const API_URL = "http://test-291124.vynz.my.id/api/auth";
+
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+  },
+});
+
+export const login = async (email: string, password: string) => {
+  try {
+    const response = await api.post("/login", { email, password });
+    
+    console.log("API Response:", response.data);
+
+    const token = response.data?.data?.token;
+    if (token) {
+      sessionStorage.setItem("token", token);
+      return { success: true, token };
+    }
+
+    return { success: false, message: "No token received" };
+  } catch (error: any) {
+    return {
+      success: false,
+      message: error.response?.data?.message || "Login failed",
+    };
+  }
+};
+
+export const logout = () => {
+  sessionStorage.removeItem("token");
+
+  if (typeof window !== "undefined") {
+    window.location.href = "/";
+  }
+};
